@@ -94,6 +94,16 @@ declare module 'gdax' {
         limit?: number;
     };
 
+    export type HistoricArgs = {
+        start?: string;
+        end?: string;
+        granularity?: 60 | 300 | 900 | 3600 | 21600 | 86400;
+    };
+
+    export type LevelArgs = {
+      level?: 1 | 2 | 3;
+    };
+
     export type FillFilter = {
         product_id?: string;
     } & PageArgs;
@@ -156,8 +166,8 @@ declare module 'gdax' {
         getProducts(callback: callback<ProductInfo[]>): void;
         getProducts(): Promise<ProductInfo[]>;
 
-        getProductOrderBook(productID: string, options: any, callback: callback<any>): void;
-        getProductOrderBook(productID: string, options: any): Promise<any>;
+        getProductOrderBook(productID: string, options: LevelArgs, callback: callback<any>): void;
+        getProductOrderBook(productID: string, options: LevelArgs): Promise<any>;
 
         getProductTicker(productID: string, callback: callback<ProductTicker>): void;
         getProductTicker(productID: string, ): Promise<ProductTicker>;
@@ -171,8 +181,8 @@ declare module 'gdax' {
         getProductTradeStream(productID: string, tradesFrom: number, tradesTo: any, callback: callback<any>): void;
         getProductTradeStream(productID: string, tradesFrom: number, tradesTo: any): Promise<any>;
 
-        getProductHistoricRates(productID: string, args: any, callback: callback<any[][]>): void;
-        getProductHistoricRates(productID: string, args: any): Promise<any[][]>;
+        getProductHistoricRates(productID: string, args: HistoricArgs, callback: callback<any[][]>): void;
+        getProductHistoricRates(productID: string, args: HistoricArgs): Promise<any[][]>;
 
         getProduct24HrStats(productID: string, callback: callback<any>): void;
         getProduct24HrStats(productID: string): Promise<any>;
